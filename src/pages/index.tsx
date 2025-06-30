@@ -1,6 +1,7 @@
 import React from 'react';
 import BlogList from '../components/BlogList';
 import { Post } from '../models/Post';
+import { GetServerSidePropsContext } from 'next';
 
 interface HomeProps {
   posts: Post[];
@@ -16,9 +17,10 @@ const HomePage: React.FC<HomeProps> = ({ posts }) => {
     </div>
   );
 };
-export async function getServerSideProps(context) {
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const host = context.req.headers.host;
+  const host = context.req?.headers.host;
   const res = await fetch(`${protocol}://${host}/api/posts`);
   const data = await res.json();
   return { props: { posts: data.posts || [] } };

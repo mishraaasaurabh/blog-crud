@@ -12,7 +12,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post }) => {
   }
   return (
     <div className="container" style={{ maxWidth: 700, margin: '3em auto', background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)', padding: 32 }}>
-      <MetaTags title={post.title} description={post.content.substring(0, 150)} />
+      <MetaTags title={post.title} description={post.content.substring(0, 150)} slug={post.slug} />
       <h1 style={{ color: '#2d3748', marginBottom: 16 }}>{post.title}</h1>
       <div style={{ color: '#4a5568', fontSize: 18, whiteSpace: 'pre-line', marginBottom: 24 }}>{post.content}</div>
       <div style={{ color: '#a0aec0', fontSize: 14 }}>Published: {new Date(post.createdAt).toLocaleString()}</div>
