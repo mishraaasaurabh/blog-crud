@@ -5,11 +5,17 @@ import { useRouter } from 'next/router';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
-const BlogEditor = ({ initialTitle = '', initialContent = '', onSubmit }) => {
+interface BlogEditorProps {
+  initialTitle?: string;
+  initialContent?: string;
+  onSubmit: (data: { title: string; content: string }) => void;
+}
+
+const BlogEditor: React.FC<BlogEditorProps> = ({ initialTitle = '', initialContent = '', onSubmit }) => {
   const [title, setTitle] = useState(initialTitle);
   const [content, setContent] = useState(initialContent);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (onSubmit) {
       onSubmit({ title, content });
